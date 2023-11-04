@@ -1,6 +1,7 @@
-from time import perf_counter
 import asyncio
 import requests
+
+from utils import Timer
 
 
 async def async_get(url):
@@ -31,16 +32,15 @@ def blocking_requests_get(url_list):
 
 async def main():
     '''the programm entry point'''
-    start = perf_counter()
+    with Timer():
 
-    url1 = 'https://example.com'
-    url2 = 'http://google.com'
-    url3 = 'https://tusur.ru'
-    url_list = [url1, url2, url3]
+        url1 = 'https://example.com'
+        url2 = 'http://google.com'
+        url3 = 'https://tusur.ru'
+        url_list = [url1, url2, url3]
 
-    res1, res2, res3 = await async_get_tasks(url_list)
-    print(f'{res1.status_code=}\n{res2.status_code=}\n{res3.status_code=}')
-    print(f'Elapsed time is {perf_counter() - start:.2f} seconds')
+        res1, res2, res3 = await async_get_tasks(url_list)
+        print(f'{res1.status_code=}\n{res2.status_code=}\n{res3.status_code=}')
 
 
 asyncio.run(main())
