@@ -5,22 +5,23 @@ import requests
 from utils import Timer, async_timeit
 
 
-async def async_aiohttp_get(url):
+async def async_aiohttp_get(url: str) -> int:
+    '''making aiohttp get requests and returning
+       status code
+    '''
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as resp:
             r = resp.status
-
-
     return r
 
 
-async def async_get(url):
+async def async_get(url: str) -> asyncio.coroutine:
     '''the atomic unit of work'''
     print(f'running async_get for {url=} ...')
     return await asyncio.to_thread(requests.get, url)
 
 
-async def async_get_gather(url_list):
+async def async_get_gather(url_list: str) -> asyncio.Task:
     '''asynchronously run async_get using async.gather method'''
     return await asyncio.gather(*[async_get(url) for url in url_list])
 
