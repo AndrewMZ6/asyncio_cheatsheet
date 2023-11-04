@@ -43,3 +43,11 @@ async def async_delay(n: int, name: str = 'default') -> int:
     await asyncio.sleep(n)
     print(f'delay {name} finished sleeping')
     return n
+
+
+def async_timeit(func):
+    async def some_main():
+        with Timer():
+            await func()
+
+    return some_main
