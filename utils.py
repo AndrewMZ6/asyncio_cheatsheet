@@ -14,7 +14,8 @@ class Timer:
         ... total execution time: x seconds
     '''
 
-    def __init__(self):
+    def __init__(self, name: str = None):
+        self.name = name
         self.start = perf_counter()
         self.end = None
         self.total_time = None
@@ -25,7 +26,7 @@ class Timer:
     def __exit__(self, *args):
         self.end = perf_counter()
         self.total_time = self.end - self.start
-        print(f'total execution time: {self.total_time:.2f} seconds')
+        print(f'total execution time{ " " + self.name if self.name else ""}: {self.total_time:.2f} seconds')
 
 
 async def async_delay(n: int, name: str = 'default') -> int:
