@@ -26,20 +26,18 @@ async def async_get_gather(url_list):
 
 
 async def main():
+    url1 = 'https://example.com'
+    url2 = 'http://google.com'
+    url3 = 'https://tusur.ru'
+    url_list = [url1, url2, url3]
+    
     with Timer('aiohttp'):
-
-        url1 = 'https://example.com'
-        url2 = 'http://google.com'
-        url3 = 'https://tusur.ru'
-        url_list = [url1, url2, url3]
-
         res = await asyncio.gather(*[async_aiohttp_get(url) for url in url_list])
         for i in res:
             print(i)
 
     with Timer('requests'):
         res = await async_get_gather(url_list)
-
         for i in res:
             print(i.status_code)
 
