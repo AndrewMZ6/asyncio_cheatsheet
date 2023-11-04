@@ -1,7 +1,7 @@
 import asyncio
 import requests
 
-from utils import Timer, async_timeit
+from utils import async_timeit, run_and_timeit
 
 
 async def async_get(url):
@@ -31,7 +31,7 @@ def blocking_requests_get(url_list):
     return response_list
 
 
-@async_timeit
+@run_and_timeit
 async def main():
     '''the programm entry point'''
     # with Timer():
@@ -44,8 +44,6 @@ async def main():
     res1, res2, res3 = blocking_requests_get(url_list)
     print(f'{res1.status_code=}\n{res2.status_code=}\n{res3.status_code=}')
 
-
-asyncio.run(main())
 
 
 # OUTPUT: (USING async_get_tasks)
