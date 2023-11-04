@@ -2,7 +2,7 @@ import asyncio
 import aiohttp
 import requests
 
-from utils import Timer
+from utils import Timer, async_timeit
 
 
 async def async_aiohttp_get(url):
@@ -25,6 +25,7 @@ async def async_get_gather(url_list):
     return await asyncio.gather(*[async_get(url) for url in url_list])
 
 
+@async_timeit
 async def main():
     url1 = 'https://example.com'
     url2 = 'http://google.com'
