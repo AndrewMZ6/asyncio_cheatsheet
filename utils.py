@@ -1,9 +1,10 @@
 from time import perf_counter
+import asyncio
 
 
 class Timer:
     '''
-        Convenience function for measuring time
+        Convenience class for measuring time
         during asyncio and threading experiments.
 
         Usage example:
@@ -25,3 +26,19 @@ class Timer:
         self.end = perf_counter()
         self.total_time = self.end - self.start
         print(f'total execution time: {self.total_time:.2f} seconds')
+
+
+async def async_delay(n: int, name: str = 'default') -> int:
+    '''
+        Convenience function for immitating
+        long running non blocking operations
+
+        Usage exmaple:
+        >>> await async_delay(5)
+        or
+        >>> await async_delay(3, 'my_delay')
+    '''
+    print(f'delay {name} is sleeping for {n} seconds')
+    await asyncio.sleep(n)
+    print(f'delay {name} finished sleeping')
+    return n
