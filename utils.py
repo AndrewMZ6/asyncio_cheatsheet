@@ -46,6 +46,19 @@ async def async_delay(n: int, name: str = 'default') -> int:
 
 
 def async_timeit(func):
+    '''
+        Convenience decorator function for 
+        measuring time of execution of 
+        "main" function in asyncronous code.
+
+        Usage example:
+
+        >>> @async_timeit
+        >>> async def main():
+        >>>     some asyncronous code ...
+        >>> ...
+        ... total execution time: x seconds
+    '''
     async def some_main():
         with Timer():
             await func()
