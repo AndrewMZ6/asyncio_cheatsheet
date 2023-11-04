@@ -64,3 +64,22 @@ def async_timeit(func):
             await func()
 
     return some_main
+
+
+def run_and_timeit(func):
+    '''
+        Instead of writing asyncio.run(main()) every time
+        just add @run_and_timeit decorator to the main
+        function definition
+
+        Usage example:
+        
+        >>> @run_and_timeit
+        >>> async def main():
+        >>>     bla bla ...
+        >>> 
+        >>> some other code without asyncio.run
+    '''
+    with Timer('MAIN'):
+        asyncio.run(func())
+        
