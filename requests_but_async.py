@@ -26,6 +26,7 @@ async def async_get_tasks(url_list):
 
 def blocking_requests_get(url_list):
     '''synchronously run requests.get'''
+    print('running blocking_r_get...')
     response_list = [requests.get(url, timeout=5) for url in url_list]
     return response_list
 
@@ -39,8 +40,28 @@ async def main():
         url3 = 'https://tusur.ru'
         url_list = [url1, url2, url3]
 
-        res1, res2, res3 = await async_get_tasks(url_list)
+        res1, res2, res3 = blocking_requests_get(url_list)
         print(f'{res1.status_code=}\n{res2.status_code=}\n{res3.status_code=}')
 
 
 asyncio.run(main())
+
+
+# OUTPUT: (USING async_get_tasks)
+#
+# running async_get for url='https://example.com' ...
+# running async_get for url='http://google.com' ...
+# running async_get for url='https://tusur.ru' ...
+# res1.status_code=200
+# res2.status_code=200
+# res3.status_code=200
+# total execution time: 1.56 seconds
+
+
+# COMPARE TO SYNCRONOUS VERSION (USING blocking_requests_get)
+#
+# running blocking_r_get...
+# res1.status_code=200
+# res2.status_code=200
+# res3.status_code=200
+# total execution time: 2.85 seconds
