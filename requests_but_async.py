@@ -1,7 +1,7 @@
 import asyncio
 import requests
 
-from utils import Timer
+from utils import Timer, async_timeit
 
 
 async def async_get(url):
@@ -31,17 +31,18 @@ def blocking_requests_get(url_list):
     return response_list
 
 
+@async_timeit
 async def main():
     '''the programm entry point'''
-    with Timer():
+    # with Timer():
 
-        url1 = 'https://example.com'
-        url2 = 'http://google.com'
-        url3 = 'https://tusur.ru'
-        url_list = [url1, url2, url3]
+    url1 = 'https://example.com'
+    url2 = 'http://google.com'
+    url3 = 'https://tusur.ru'
+    url_list = [url1, url2, url3]
 
-        res1, res2, res3 = blocking_requests_get(url_list)
-        print(f'{res1.status_code=}\n{res2.status_code=}\n{res3.status_code=}')
+    res1, res2, res3 = blocking_requests_get(url_list)
+    print(f'{res1.status_code=}\n{res2.status_code=}\n{res3.status_code=}')
 
 
 asyncio.run(main())
