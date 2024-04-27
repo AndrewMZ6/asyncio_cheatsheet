@@ -13,3 +13,8 @@ async def main():
 if __name__ == '__main__':
 	asyncio.run(main())
 	
+
+# execution results
+# starting my_coro
+# finishing my_coro
+# [Finished in 3.1s]
