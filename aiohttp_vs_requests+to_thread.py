@@ -11,7 +11,7 @@ async def async_aiohttp_get(url: str) -> int:
     '''
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as resp:
-            r = resp.status
+            r = resp
     return r
 
 
@@ -34,14 +34,17 @@ async def main():
     url_list = [url1, url2, url3]
     
     with Timer('aiohttp'):
+        print('>>> aiohttp')
         res = await asyncio.gather(*[async_aiohttp_get(url) for url in url_list])
         for i in res:
-            print(i)
+            print(f'status code {i.status} for url {i.url}')
 
     with Timer('requests'):
+        print('>>> requests')
         res = await async_get_gather(url_list)
         for i in res:
-            print(i.status_code)
+            print(f'status code {i.status_code} for url {i.url}')
+            
 
 
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy()) # some weired thing for aiohttp to work
