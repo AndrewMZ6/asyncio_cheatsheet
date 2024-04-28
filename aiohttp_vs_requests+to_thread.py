@@ -46,7 +46,7 @@ async def main():
             
 
 
-asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy()) # some weired thing for aiohttp to work
+asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy()) # to prevent RuntimeErrors on "windows"
 asyncio.run(main())
 
 # Execution results
